@@ -51,4 +51,10 @@ public class DepartmentServiceImpl implements DepartmentService{
         return departmentRepository.save(depDB);
 
     }
+
+    @Override
+    public Department fetchDepartmentByName(String departmentName) {
+        //no default method to fetch by name so create one method in departmentRepository
+        return departmentRepository.findByDepartmentName(departmentName);
+    }
 }

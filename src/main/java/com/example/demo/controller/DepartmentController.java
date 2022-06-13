@@ -5,6 +5,7 @@ import com.example.demo.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -13,9 +14,10 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
 
+
     @PostMapping("/departments")
     //json which we are getting as req body convert that to department obj
-    public Department saveDepartment(@RequestBody Department department){
+    public Department saveDepartment(@Valid @RequestBody Department department){
     //pass the department object to service layer
         //service layer will contain a method called save departemnt
         return departmentService.saveDepartment(department);
@@ -42,5 +44,9 @@ public class DepartmentController {
         //will need both id and request body as paramenter
         return departmentService.updateDepartment(departmentId,department);
      }
+    @GetMapping("/departments/name/{name}")
+    public Department fetchDepartmentByName(@PathVariable("name") String departmentName){
+        return departmentService.fetchDepartmentByName(departmentName);
+    }
 
 }
